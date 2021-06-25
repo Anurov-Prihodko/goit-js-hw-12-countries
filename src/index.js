@@ -2,7 +2,8 @@
 import './sass/main.scss';
 import fetchCountries from './fetchCountries.js';
 var debounce = require('lodash.debounce');
-import markupForCountries from './templates/markup.hbs';
+import markupForCountry from './templates/markupCountry.hbs';
+import markupSeveralCountry from './templates/markupSeveralCountry.hbs';
 
 
 fetch(`https://restcountries.eu/rest/v2/name/Ukraine`)
