@@ -2,14 +2,17 @@
 import './sass/main.scss';
 import fetchCountries from './fetchCountries.js';
 var debounce = require('lodash.debounce');
+import markupForCountries from './templates/markup.hbs';
 
 
+fetch(`https://restcountries.eu/rest/v2/name/Ukraine`)
+    .then(response => {
+    return response.json()
+    })
+    .then(country => {
+    console.log(country);
+    })
+    .catch(error => {
+    console.log(error);    
+    })
 
-document.querySelector('input').addEventListener(
-  'input',
-  debounce(() => {
-    console.log(
-      'Input event handler invocation after 300ms of inactivity past burst.',
-    );
-  }, 1000),
-);
