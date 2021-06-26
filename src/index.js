@@ -1,19 +1,31 @@
 'use strict';
 import './sass/main.scss';
-import fetchCountries from './fetchCountries.js';
-var debounce = require('lodash.debounce');
+import fetchCountries from './js/fetchCountries.js';
+let debounce = require('lodash.debounce');
 import markupForCountry from './templates/markupCountry.hbs';
-import markupSeveralCountry from './templates/markupSeveralCountry.hbs';
+import markupSeveralCountries from './templates/markupSeveralCountries.hbs';
 
+const refs = {
+    cardContainer: document.querySelector('.markup-js')
+}
 
-fetch(`https://restcountries.eu/rest/v2/name/Ukraine`)
-    .then(response => {
-    return response.json()
-    })
-    .then(country => {
-    console.log(country);
+// refs.cardContainer.addEventListener('input', debounce(fetchCountries, 2000))
+
+fetchCountries('ukraine').then(country => {
+        renderOneCountry(country, markupForCountry);
+        // renderSeveralCountry(country, markupSeveralCountries);
     })
     .catch(error => {
-    console.log(error);    
-    })
+        console.log('Pus sed', error);    
+    });
+
+function renderOneCountry(countries, hds) {
+    const markup = countries.map(count => hds(count)).join();
+    refs.cardContainer.innerHTML = markup;
+}
+
+function renderSeveralCountry(countries, hds) {
+    const markup = countries.map(count => hds(count)).join();
+    refs.cardContainer.innerHTML = markup;
+}
 

@@ -9,8 +9,8 @@ html {
 }
 
 body {
-  background-color: rgb(109, 109, 109);
-  background-image: linear-gradient(rgba(48, 48, 51, 0.4), rgba(47, 48, 58, 0.4)),
+  background-color: rgb(255, 255, 255);
+  background-image: linear-gradient(rgba(172, 172, 173, 0.7), rgba(172, 172, 173, 0.7)),
     url('../images/cyberpunk.jpg');
   background-size: cover;
 }
@@ -22,13 +22,28 @@ body {
   justify-content: center;
 }
 
+.markup-js {
+  margin: 0 auto;
+  align-items: center;
+  padding: 0;
+}
+
 .flag {
-  width: 350px;
-  height: 335px;
+  width: 225px;
+  height: 212px;
 }
 
 .text {
   font-weight: bold;
+}
+
+.country {
+  font-size: 35px;
+  margin: 10px;
+}
+
+.form_country_properties {
+  font-size: 25px;
 }
 
 .form-text {
