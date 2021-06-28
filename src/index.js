@@ -1,16 +1,14 @@
 'use strict';
 import './sass/main.scss';
-import fetchCountries from './js/fetchCountries.js';
 let debounce = require('lodash.debounce');
 import markupForCountry from './templates/markupCountry.hbs';
 import markupSeveralCountries from './templates/markupSeveralCountries.hbs';
 import '@pnotify/core/dist/BrightTheme.css';
 import { alert, success, error } from '@pnotify/core';
+import API from './js/fetchCountries.js';
+import getRefs from '../src/js/get-refs.js';
 
-const refs = {
-    cardContainer: document.querySelector('.markup-js'),
-    inputForm: document.querySelector('#searchQuery'),
-}
+const refs = getRefs();
 
 refs.inputForm.addEventListener('input', debounce(onSearch, 2000))
 
@@ -19,7 +17,7 @@ function onSearch(e) {
     clearCountryContainer();
     const searchQuery = e.target.value;
 
-    fetchCountries(searchQuery)
+    API.fetchCountries(searchQuery)
         .then(country => {
             // console.log(country.length);
             if (country.length === 1) {
