@@ -10,7 +10,7 @@ import getRefs from '../src/js/get-refs.js';
 
 const refs = getRefs();
 
-refs.inputForm.addEventListener('input', debounce(onSearch, 2000))
+refs.inputForm.addEventListener('input', debounce(onSearch, 500))
 
 function onSearch(e) {
     e.preventDefault();
