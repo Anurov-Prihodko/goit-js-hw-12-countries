@@ -21,8 +21,20 @@ function onSearch(e) {
 
     fetchCountries(searchQuery)
         .then(country => {
-            renderOneCountry(country, markupForCountry);
-        // renderSeveralCountry(country, markupSeveralCountries);
+            // console.log(country.length);
+            if (country.length === 1) {
+                renderOneCountry(country, markupForCountry);
+                onSuccessfulRequest();
+            } else if (country.length <= 10) {
+                renderSeveralCountry(country, markupSeveralCountries);
+                notSpecificEnoughAlert();
+            } else if (country.length > 10) {
+                clearCountryContainer();
+                tooManyMatchesError();
+            } else if (country.status === 404) {
+                clearCountryContainer();
+                onFetchError();
+            }        
         })
         .catch(onFetchError)
 }
