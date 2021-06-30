@@ -24,11 +24,9 @@ function onSearch(e) {
             if (country.length === 1) {
                 renderCountry(country, markupForCountry);
                 onSuccessfulRequest();
-            }
-            else if (country.length <= 10) {
+            } else if (country.length <= 10) {
                 renderCountry(country, markupSeveralCountries);
                 notSpecificEnoughAlert();
-                // console.log('there is refs.inputForm.value:', refs.inputForm.value);
             } else if (country.length > 10) {
                 clearCountryContainer();
                 tooManyMatchesError();
@@ -38,7 +36,7 @@ function onSearch(e) {
             return
         })        
         .catch((err => {
-            onFetchError(err);
+            onFetchError();
             console.log(err);
         }))
     }   
@@ -55,7 +53,7 @@ function clearCountryContainer() {
 
 function onFetchError() {
     error({
-        text: "Something went wrong! Please enter a valid country name"
+        text: "Something went wrong! Please enter a valid country name."
     });
 }
 
