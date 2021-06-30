@@ -8,6 +8,10 @@ html {
   box-sizing: inherit;
 }
 
+a {
+  text-decoration: none;
+}
+
 body {
   background-color: rgb(255, 255, 255);
   background-image: linear-gradient(rgba(172, 172, 173, 0.7), rgba(172, 172, 173, 0.7)),
@@ -60,4 +64,10 @@ body {
   max-width: 500px;
   text-align: left;
   margin: 0 auto;
+  cursor: pointer;
+}
+
+.severalCountryList:hover,
+.severalCountryList:focus {
+  color: blue;
 }

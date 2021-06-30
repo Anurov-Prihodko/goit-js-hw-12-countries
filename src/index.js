@@ -15,34 +15,36 @@ refs.inputForm.addEventListener('input', debounce(onSearch, 500))
 function onSearch(e) {
     e.preventDefault();
     clearCountryContainer();
-    const searchQuery = e.target.value;
+    const searchQuery = e.target.value.trim();
 
-    API.fetchCountries(searchQuery)
+    if (searchQuery) {
+        API.fetchCountries(searchQuery)
         .then(country => {
             // console.log(country.length);
             if (country.length === 1) {
-                renderOneCountry(country, markupForCountry);
+                renderCountry(country, markupForCountry);
                 onSuccessfulRequest();
-            } else if (country.length <= 10) {
-                renderSeveralCountry(country, markupSeveralCountries);
+            }
+            else if (country.length <= 10) {
+                renderCountry(country, markupSeveralCountries);
                 notSpecificEnoughAlert();
+                // console.log('there is refs.inputForm.value:', refs.inputForm.value);
             } else if (country.length > 10) {
                 clearCountryContainer();
                 tooManyMatchesError();
             } else if (country.status === 404) {
-                clearCountryContainer();
                 onFetchError();
-            }        
-        })
-        .catch(onFetchError)
+            }
+            return
+        })        
+        .catch((err => {
+            onFetchError(err);
+            console.log(err);
+        }))
+    }   
 }
 
-function renderOneCountry(countries, hds) {
-    const markup = countries.map(count => hds(count)).join();
-    refs.cardContainer.innerHTML = markup;
-}
-
-function renderSeveralCountry(countries, hds) {
+function renderCountry(countries, hds) {
     const markup = countries.map(count => hds(count)).join();
     refs.cardContainer.innerHTML = markup;
 }
